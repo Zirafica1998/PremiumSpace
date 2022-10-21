@@ -1,0 +1,74 @@
+
+body{
+  overflow-x: hidden;
+  .slick-slide img{
+    height: 95vh;
+    width: 100%;
+  }
+  
+  .header{
+    position: absolute;
+    z-index: 100;
+    top: 2%;
+    margin: 0 auto;
+    width: 100%;
+    .logo{
+      >img{
+        width: 50%;
+      }
+    }
+    .links{
+      padding-top: 50px;
+      >ul{
+        list-style: none;
+        width: 100%;
+        display: inline-flex;
+        font-size: 16px;
+        padding-left: 50px;
+        padding-right: 50px;
+        >li{
+          list-style: none;
+          width: 33%;
+          text-align: center;
+          margin-right: -4px;
+          >a{
+            text-decoration: none;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  .footer{
+    text-align: center;
+    background-color: #222;
+    color: #ffffff;
+    >div{
+      padding: 1%;
+      >div{
+        .name{
+          >h2{
+            >span{
+              color: gray;
+            }
+          }
+        }
+        .mobileNumber{
+          >a{
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            padding: 3%;
+          }
+        }
+        .logo{
+          >img{
+            width: 70%;
+            padding: 5%;
+          }
+        }
+      }
+    }
+    
+  }
+}
