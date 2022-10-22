@@ -39,6 +39,32 @@ body{
       }
     }
   }
+  .forms{
+    z-index: 1001;
+    position: relative;
+    margin-top: -4.5%;
+    background-color: #222;
+    padding: 2%;
+    .input-group{
+      height: 50px;
+      >select{
+        width: 16%;
+      }
+      >input[name= searchWord]{
+        width: 30%;
+      }
+      >input[type= submit]{
+        width: 14%;
+      }
+      >input[name= sizeFrom],
+      >input[name= sifeOf],
+      >input[name= priceOf],
+      >input[name= priceFrom]{
+        width: 10%;
+      }
+      
+    }
+  }
   .footer{
     text-align: center;
     background-color: #222;
