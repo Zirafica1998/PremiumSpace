@@ -1,4 +1,25 @@
 
+$primeColor:#ceab74;
+$primeColorHover:#D6BA8D;
+
+
+.button-prime{
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1;
+  padding: 20px 24px;
+  text-transform: uppercase;
+  width: auto;
+  background-color: $primeColor;
+  border: none;
+  &:hover{
+    background-color: $primeColorHover;
+  }
+}
+
+
 body{
   overflow-x: hidden;
   .slick-slide img{
@@ -12,30 +33,45 @@ body{
     top: 2%;
     margin: 0 auto;
     width: 100%;
-    .logo{
-      >img{
-        width: 50%;
+    .head{
+      background-color: rgba(0, 0, 0, 0.5);
+      .logo{
+        >img{
+          width: 50%;
+        }
       }
     }
+   
     .links{
       padding-top: 50px;
-      >ul{
+      .menu-primary-navigation{
         list-style: none;
         width: 100%;
         display: inline-flex;
         font-size: 16px;
         padding-left: 50px;
         padding-right: 50px;
-        >li{
+        .menu-item{
           list-style: none;
           width: 33%;
           text-align: center;
           margin-right: -4px;
+          &:hover{
+            font-size: 18px;
+          }
           >a{
             text-decoration: none;
             color: white;
+            cursor: pointer;
           }
         }
+      }
+    }
+    .text-banner{
+      margin-top: 10%;
+      text-align: left;
+      >h1{
+        color: white;
       }
     }
   }
@@ -65,6 +101,159 @@ body{
       
     }
   }
+  .result{
+    margin-top: 5%;
+    .result-search{
+      .search-container {
+       >div{
+          .result-count{
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 2%;
+            >p{
+              border-bottom: 1px solid $primeColor;
+              >span{
+                color: $primeColor;
+              }
+            }
+          }
+          .realEstate{
+            margin-bottom: 2%;
+
+            >a{
+              text-decoration: none;
+              color: black;
+              .up-section{
+                position: relative;
+                .img{
+                  >img{
+                    object-fit: cover;
+                    width: 100%;
+                    height: 230px;
+                  }
+                }
+                .price{
+                  position: absolute;
+                  inset: 0;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  font-size: 2.25rem;
+                  font-weight: 500;
+                  background-color: #00000080;
+                  color: white;
+                }
+              }
+              .center-section{
+                .title{
+                  text-align: center;
+                  font-weight: bold;
+                }
+                .location{
+                  color: red;
+                }
+                .desc{
+                  height: 145px;
+                  overflow: hidden;
+                  display: block;
+                }
+              }
+              .bottom-section{
+                display: flex;
+                text-align: center;
+                .number-room{
+                  width: 50%;
+                  font-weight: bold;
+                  border: 2px solid;
+                  >img{
+                    width: 25px;
+                  }
+                }
+                .size{
+                  width: 50%;
+                  font-weight: bold;
+                  border: 2px solid;
+                  border-left: none;
+                  >img{
+                    width: 25px;
+                  }
+                }
+              }
+            }
+            
+          }
+          >nav{
+            >ul{
+              width: max-content;
+              margin: 2% auto;
+            }
+          }
+        }
+        
+      }
+    }
+  }
+  .newPost{
+    margin-top: 0 !important;
+    .result-search{
+      .search-container{
+        .title{
+          text-align: center;
+          border-bottom: 1px solid gray;
+          margin-bottom: 2%;
+        }
+        .slick-slider{
+          margin-bottom: 5%;
+          .slick-list{
+            .slick-track{
+              .slick-slide {
+                >div{
+                  .realEstate {  
+                    padding: 20px;
+                    .bottom-section img{
+                      width: 25px;
+                      height: 25px;
+                      display: inline-block;
+                    }
+                  }
+                }
+                //height: 25px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .sendQuest{
+    position: relative;
+    >img{
+      height: 60vh;
+      width: 100%;
+      object-fit: cover;
+    }
+    >div{
+      position: absolute;
+      top: 15%;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      .container-quest{
+        background-color: rgba(255,255,255,0.8);
+        padding: 30px;
+        text-align: center;
+        display: inline-grid;
+        >button{
+          width: max-content;
+          margin: 0 auto;
+          margin-top: 3%;
+        }
+      }
+    }
+    
+  }
   .footer{
     text-align: center;
     background-color: #222;
@@ -75,7 +264,7 @@ body{
         .name{
           >h2{
             >span{
-              color: gray;
+              color: $primeColor;
             }
           }
         }
@@ -93,6 +282,16 @@ body{
             padding: 5%;
           }
         }
+      }
+      .reserver{
+          list-style: none;
+          >li{
+            >a{
+              text-decoration: none;
+              color: white;
+              cursor: pointer;
+            }
+          }
       }
     }
     
