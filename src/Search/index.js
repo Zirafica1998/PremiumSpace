@@ -101,7 +101,7 @@ export default function SearchForm() {
                   <input name="sizeOf" type="text"  placeholder="do m2" onChange={(e) => {setSizeOf(e.target.value)}} />
                   <input name="priceFrom" type="text"  placeholder="cena od" onChange={(e) => {setpriceFrom(e.target.value)}} />
                   <input name="priceOf" type="text"  placeholder="cena do" onChange={(e) => {setpriceOf(e.target.value)}}/>
-                  <button onClick={submitSearch}>Pretrazi</button>
+                  <button className="button-prime" onClick={submitSearch}>Pretrazi</button>
               </div>
       </div>
       <div className="container result">

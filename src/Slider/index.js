@@ -19,7 +19,7 @@ export default class SimpleSlider extends Component {
       autoplaySpeed: 10000,
     };
     return (
-      <div>
+      <div className="mainSlider">
         <Slider {...settings}>
           <div>
             <img src="/slider/1.jpg" alt="image" />

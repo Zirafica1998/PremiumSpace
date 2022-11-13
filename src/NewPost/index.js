@@ -63,7 +63,7 @@ export default function NewPost() {
                                     </div>
                                     <div className="size">
                                         <img src="size-icon.png" alt="size-icon"></img>
-                                        <span>{val.povrsina}</span>
+                                        <span>{val.povrsina} m²</span>
                                     </div>
                                 </div>
                             </a>

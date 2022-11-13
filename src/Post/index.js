@@ -15,10 +15,6 @@ export default function Posts( posts, loading, pressSearch){
   const currentPost = (posts.posts).slice(indexOfFirstPost, indexOfLastPost);
 
 
-  // const paginate = pageNumber => setCurrentPage(pageNumber);
-  // setPostsGet(posts);
-  // setSubmit(true)
-
  
   const paginate = pageNumber => setCurrentPage(pageNumber);
   useEffect(()=>{
@@ -33,7 +29,7 @@ export default function Posts( posts, loading, pressSearch){
           <div className="result-count"><p><span>{postsGet.length}</span> rezultata na osnovu pretrage</p></div>
           {currentPost.map(val => (
               <div className="realEstate col-lg-4 col-md-4 col-sm-6"  key={val.id} >
-                <a href="#" key={val.id}>
+                <a href={"products/"+val.id} key={val.id}>
                   <div className="up-section">
                     <div className="img">
                         <img src={((val.slika).toString().split(';'))[0]} alt="image" />
@@ -62,7 +58,7 @@ export default function Posts( posts, loading, pressSearch){
                     </div>
                     <div className="size">
                       <img src="size-icon.png" alt="size-icon"></img>
-                      <span>{val.povrsina}</span>
+                      <span>{val.povrsina} m²</span>
                     </div>
                   </div>
               </a>
