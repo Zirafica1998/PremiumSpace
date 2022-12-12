@@ -24,15 +24,16 @@ export default function SearchForm() {
   var jsonObject=[]
   var jsonObject1=[]
   const submitSearch = () => {
-    var data = JSON.stringify({"type":type,"searchWord":searchWord, "sizeFrom": sizeFrom, "sizeOf":sizeOf,"priceFrom":priceFrom,"priceOf":priceOf});
-    //setLoading(false);
-
+    setLoading(false);
     const fetchPosts = async () => {
       setLoading(true);
-      const res = await Axios.get('http://localhost:3001/api/get/'+data);
+     await Axios.post('http://localhost:3001/realEstate/byData',{
+      searchWord:searchWord,
+      type:type
+     }).then((res) =>{
       if(res.data.length>0){
-        // setPosts(res.data);
-        // setLoading(false);
+        setPosts(res.data);
+        setLoading(false);
         (res.data).forEach((element,index)=>{
           
           if(sizeFrom !="" && sizeOf != ""){
@@ -50,8 +51,6 @@ export default function SearchForm() {
           }else if(sizeFrom =="" && sizeOf == ""){
             jsonObject.push(element);
           }
-          
-          
         })
 
         jsonObject.forEach((element,index)=>{
@@ -78,6 +77,7 @@ export default function SearchForm() {
       }else{
         alert("Nema prozivoda")
       }
+     })
       setPosts(jsonObject1);
     };
     fetchPosts();

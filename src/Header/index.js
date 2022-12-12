@@ -19,7 +19,7 @@ export default class Header extends Component {
                         <li className="menu-item"><a href="/"><span>Premium Space</span></a></li>
                         <li className="menu-item"><a><span>Kreditni savetnik</span></a></li>
                         <li className="menu-item"><a><span>O nama</span></a></li>
-                        <li className="menu-item"><a><span>Strucni tekstovi</span></a></li>
+                        <li className="menu-item"><a href="/strucni-tekstovi"><span>Strucni tekstovi</span></a></li>
                         <li className="menu-item"><a><span>Kontakt</span></a></li>
                     </ul>
                 </nav>

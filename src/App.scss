@@ -133,7 +133,7 @@ body{
           }
           .realEstate{
             margin-bottom: 2%;
-
+            cursor: pointer;
             >a{
               text-decoration: none;
               color: black;
@@ -158,11 +158,22 @@ body{
                   background-color: #00000080;
                   color: white;
                 }
+                .type{
+                  display: block;
+                  width: 100%;
+                  background: $primeColor;
+                  font-size: 18px;
+                  color: white;
+                  font-weight: bold;
+                  position: absolute;
+                }
               }
               .center-section{
                 .title{
                   text-align: center;
                   font-weight: bold;
+                  height: 25px;
+                  overflow: hidden;
                 }
                 .location{
                   color: red;
@@ -339,6 +350,8 @@ body{
                   >div{
                     >img{
                       width: 100%;
+                      height: 460px;
+                      object-fit: contain;
                     }
                   }
                 }
@@ -444,5 +457,410 @@ body{
         }
       }
     }
+  }
+}
+
+
+//LOGIN
+
+.loginContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding-top: 100px;
+}
+
+.loginContainer input,
+button {
+  width: 200px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  margin: 10px;
+}
+
+.loginContainer button {
+  background-color:$primeColor;
+  color: white;
+}
+
+.loginContainer input {
+  border: 2px solid $primeColor;
+}
+
+//ADMIN
+.header-admin{
+  background-color: rgba(0, 0, 0, 0.5);
+  .container{
+    .navbar-brand{
+      color:$primeColor;
+      font-size: 25px;
+    }
+    .navbar-nav{
+      >a{
+        color: white;
+        font-size: 18px;
+      }
+    }
+    .navbar-collapse{
+      .navbar-text{
+        margin-right: 10px;
+        color: white;
+        font-size: 18px;
+        >span{
+          color: $primeColor;
+          margin-left: 2px;
+        }
+      }
+      .btn{
+        font-weight: bold;
+        background: $primeColor;
+        width: max-content;
+        border: none;
+      }
+    }
+  }
+}
+
+
+#products{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 2%;
+}
+#products tr:hover {background-color: #ddd;}
+
+#products thead {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: $primeColor;
+  color: white;
+  width: 100%;
+  overflow: auto;
+  overflow-x: auto;
+  >tr{
+    display: flex;
+    >th{
+      width: 150px;
+      padding: 20px;
+    }
+  }
+}
+
+#products tbody {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: black;
+  width: 100%;
+  background: white;
+  overflow: auto;
+  overflow-x: auto;
+  >tr{
+    display: flex;
+    >th{
+      width: 150px;
+      padding: 20px;
+      height: 50px;
+      overflow: hidden;
+    }
+  }
+}
+
+#blogs{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 2%;
+}
+
+
+#blogs tr:hover {background-color: #ddd;}
+
+#blogs thead {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: $primeColor;
+  color: white;
+  width: 100%;
+  overflow: auto;
+  overflow-x: auto;
+  >tr{
+    display: flex;
+    th:nth-child(1){
+      width: 5%;
+    }
+    th:nth-child(2){
+      width: 5%;
+    }
+    th:nth-child(3){
+      width: 20%;
+    }
+    th:nth-child(4){
+      width: 65%;
+    }
+    th:nth-child(5){
+      width: 5%;
+    }
+    >th{
+      padding: 20px;
+    }
+  }
+}
+
+#blogs tbody {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: black;
+  width: 100%;
+  background: white;
+  overflow: auto;
+  overflow-x: auto;
+  >tr{
+    display: flex;
+    th:nth-child(1){
+      width: 5%;
+    }
+    th:nth-child(2){
+      width: 5%;
+    }
+    th:nth-child(3){
+      width: 20%;
+    }
+    th:nth-child(4){
+      width: 65%;
+    }
+    th:nth-child(5){
+      width: 5%;
+    }
+    >th{
+      padding: 20px;
+      height: 40px;
+      overflow: hidden;
+    }
+  }
+}
+
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+ 
+.box {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #999;
+  overflow: auto;
+}
+ 
+.close-icon {
+  content: 'x';
+  cursor: pointer;
+  position: fixed;
+  right: calc(15% - 30px);
+  top: calc(100vh - 85vh - 33px);
+  background: #ededed;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #999;
+  font-size: 20px;
+}
+
+.createPostPage{
+  >h3{
+    text-align: center;
+  }
+  .formContainer{
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    .content-form{
+      display: flex;
+      #basicInf{
+        width: 50%;
+        >h5{
+          border-bottom: 1px solid gray;
+          width: max-content;
+          font-weight: bold;
+        }
+        >span{
+          color: red;
+        }
+        >input{
+          display: block;
+          width: 80%;
+          text-align: center;
+          padding: 5px
+        }
+        >label{
+          display: block;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        >select{
+          display: block;
+          width: 80%;
+          text-align: center;
+        }
+        >textarea{
+          width: 80%;
+          height: 20vh;
+          margin: 0 0;
+        }
+        >div{
+          .dropZone{
+            margin-top: 2%;
+            padding: 40px;
+            width: "100%";
+            height: "auto";
+            border-width: 2;
+            border-color: rgb(102, 102, 102);
+            border-style: dashed;
+            border-radius: 5;
+          }
+        }
+      }
+      #moreInf{
+        width: 50%;
+        >h5{
+          border-bottom: 1px solid gray;
+          width: max-content;
+          font-weight: bold;
+        }
+        >span{
+          color: red;
+        }
+        >input{
+          display: block;
+          width: 80%;
+          text-align: center;
+          padding: 5px
+        }
+        >label{
+          display: block;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        >select{
+          display: block;
+          width: 80%;
+          text-align: center;
+        }
+        .check-content{
+          margin-top: 2%;
+          >label{
+            display: inline-flex;
+            width: 100%;
+            >input{
+              margin-right: 5%;
+            }
+          }
+        }
+      }
+    }
+    .button-section{
+      text-align: center;
+      >button{
+        margin: 2%;
+        font-weight: bold;
+      }
+    }
+  }
+  
+}
+.openAddBlog,
+.openAddProduct{
+  margin: 2% auto;
+  display: block;
+}
+.deleteBlog,
+.deleteProduct{
+  margin-top: 2%;
+}
+
+
+.createBlogPage{
+  >h3{
+    text-align: center;
+  }
+  .formContainer{
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    .content-form{
+      display: grid;
+      width: 70%;
+      margin: 0 auto;
+        >input{
+          display: block;
+          width: 80%;
+          text-align: center;
+          padding: 5px
+        }
+        >label{
+          display: block;
+          font-size: 16px;
+          font-weight: bold;
+        }
+       
+        >textarea{
+          width: 80%;
+          height: 20vh;
+          margin: 0 0;
+        }
+    }
+  }
+  .button-section{
+    text-align: center;
+    >button{
+      margin: 2%;
+      font-weight: bold;
+    }
+  }
+}
+
+
+.list-blogs{
+  margin:5%;
+  >div{
+    margin-top: 4%;
+    border-bottom: 1px solid $primeColor;
+    .title{
+      font-weight: bold;
+    }
+    .created{
+      color: $primeColor;
+    }
+  }
+  
+}
+
+.blogs-detail{
+  margin: 5%;
+  .date{
+    color: $primeColor;
   }
 }

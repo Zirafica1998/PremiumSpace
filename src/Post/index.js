@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import {useNavigate} from "react-router-dom"
 import Pagination from "./Pagination";
 
 export default function Posts( posts, loading, pressSearch){
@@ -8,6 +9,8 @@ export default function Posts( posts, loading, pressSearch){
   const [postsPerPage] = useState(12);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+  let history = useNavigate();
 
 
  
@@ -28,15 +31,17 @@ export default function Posts( posts, loading, pressSearch){
         <div className='row'>
           <div className="result-count"><p><span>{postsGet.length}</span> rezultata na osnovu pretrage</p></div>
           {currentPost.map(val => (
-              <div className="realEstate col-lg-4 col-md-4 col-sm-6"  key={val.id} >
-                <a href={"products/"+val.id} key={val.id}>
+              <div className="realEstate col-lg-4 col-md-4 col-sm-6"  key={val.id} onClick = {() => {history('/products/'+val.id)}}>
+                <a>
                   <div className="up-section">
                     <div className="img">
-                        <img src={((val.slika).toString().split(';'))[0]} alt="image" />
-                      
+                      <img src={"https://firebasestorage.googleapis.com/v0/b/premiumspace-dfd7a.appspot.com/o/images%2F"+(val.id)+"%2F"+((val.slika).toString().split(';'))[0]+"?alt=media"} alt="image" />
                     </div>
                     <div className="price">
                         <span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(val.cena)}</span>
+                    </div>
+                    <div className="type">
+                       <span>{val.vrstaUsluge}</span>
                     </div>
                   </div>
                   <div className="center-section">
@@ -47,8 +52,7 @@ export default function Posts( posts, loading, pressSearch){
                       <span>{val.opstina}</span>
                     </div>
                     <span className="desc">
-                      {/* <span>{val.opis}</span> */}
-                      is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                      <span>{val.opis}</span>
                     </span>
                   </div>
                   <div className="bottom-section">

@@ -1,5 +1,6 @@
 import React, { useEffect ,useState} from 'react';
 import Axios from 'axios'
+import {useNavigate} from "react-router-dom"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -7,11 +8,11 @@ import "slick-carousel/slick/slick-theme.css";
 export default function NewPost() {
  const [data, setData] = useState([])
  const [isLoading, setIsLoading] = useState(false);
+ let history = useNavigate();
+
   useEffect(()=>{
-    Axios.get('http://localhost:3001/get/newPost').then((data)=>{
+    Axios.get('http://localhost:3001/realEstate/last6').then((data)=>{
         if((data.data).length>0){
-            // console.log(data.data);
-            // data=data.data;
             setData(data.data);
             setIsLoading(true);
         }
@@ -34,14 +35,17 @@ export default function NewPost() {
                 <div className='title'><h2>Najnovije nekretnine</h2></div>
                     <Slider {...settings}>
                     {isLoading && (data).map(val => (
-                        <div className="realEstate col-lg-4 col-md-4 col-sm-6" key={val.id}>
+                        <div className="realEstate col-lg-4 col-md-4 col-sm-6" key={val.id} onClick = {() => {history('/products/'+val.id)}}>
                             <a href='#' ket={val.id}>
                                 <div className="up-section">
                                     <div className="img">
-                                        <img src={((val.slika).toString().split(';'))[0]} alt="image" />
+                                        <img src={"https://firebasestorage.googleapis.com/v0/b/premiumspace-dfd7a.appspot.com/o/images%2F"+(val.id)+"%2F"+((val.slika).toString().split(';'))[0]+"?alt=media"} alt="image" />
                                     </div>
                                     <div className="price">
                                         <span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(val.cena)}</span>
+                                    </div>
+                                    <div className="type">
+                                        <span>{val.vrstaUsluge}</span>
                                     </div>
                                 </div>
                                 <div className="center-section">
@@ -52,8 +56,7 @@ export default function NewPost() {
                                         <span>{val.opstina}</span>
                                     </div>
                                     <div className="desc">
-                                    {/* <span>{val.opis}</span> */}
-                                    is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                    <span>{val.opis}</span>
                                     </div>
                                 </div>
                                 <div className="bottom-section">

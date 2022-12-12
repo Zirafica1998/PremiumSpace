@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -25,7 +26,7 @@ export default class Footer extends Component {
         </div>
         <div className="container">
           <ul className="reserver">
-            <li><a href="#"><span>admin</span></a></li>
+            <li><Link to="/admin" target="_blank"><span>admin</span></Link></li>
             <li><span>©2022 All Rights Reserved by WebX</span></li>
           </ul>
         </div>
