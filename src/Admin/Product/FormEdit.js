@@ -4,6 +4,7 @@ import {ref, uploadBytes,uploadBytesResumable, deleteObject,getStorage,listAll  
 import axios from 'axios';
 import {v4} from "uuid"
 import { data } from 'jquery';
+import MessageBox from '../../MessageBox';
 
 export default function MyFormEdit(data) {
   const [id,setId] = useState(data.data.id)
@@ -11,6 +12,8 @@ export default function MyFormEdit(data) {
   const [progress, setProgress] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesValue, setImagesValue] = useState(data.data.slika);
+  const [success, setSuccess] = useState(false);
+
 
   //VALUE FROM INPUT
   const [vrstaUsluge, setVrstaUsluge] = useState(data.data.vrstaUsluge);
@@ -88,9 +91,7 @@ export default function MyFormEdit(data) {
     }
     axios.post("http://localhost:3001/realEstate/edit", data).then((response) => {
         if(response.status == 200){
-        window.location.reload(false);
-        }else{
-        alert("Greska")
+          setSuccess(true)
         }
     })
 }
@@ -120,7 +121,7 @@ export default function MyFormEdit(data) {
     promises.push(addProduct);
 
     Promise.all(promises)
-      .then(() =>window.location.reload(false) )
+      .then(() =>setSuccess(true) )
       .catch((err) => console.log(err));
   };
 
@@ -142,7 +143,8 @@ export default function MyFormEdit(data) {
 
   return (
     <div>
-        <div className="formContainer">
+          {success && <MessageBox text="Uspesno ste izmenili nekretninu" refresh={true}></MessageBox>}
+          <div className="formContainer">
                     <div className="content-form">
                     <div id="basicInf">
                         <h5>Osnovne informacije</h5>

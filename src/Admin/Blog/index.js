@@ -20,7 +20,6 @@ function Blog() {
     setIsOpenAdd(!isOpenAdd);
   }
   const deleteRow = (data) =>{
-    console.log(data);
     var checkedBoxes = document.querySelectorAll('input[name=mycheckboxes]:checked');
     var idList=[];
     checkedBoxes.forEach((element,index) =>{
@@ -29,8 +28,6 @@ function Blog() {
     axios.post("http://localhost:3001/blog/delete", idList).then((response) => {
       if(response.status == 200){
         window.location.reload(false);
-      }else{
-        alert("Greska")
       }
     });
   }

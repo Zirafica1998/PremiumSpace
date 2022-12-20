@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import {storage} from '../../helpers/firebase';
-import {ref, uploadBytes,uploadBytesResumable, deleteObject,getStorage,listAll  } from 'firebase/storage'
+import {ref,uploadBytesResumable, deleteObject,getStorage,listAll  } from 'firebase/storage'
 import axios from 'axios';
-import {v4} from "uuid"
 import $ from "jquery"
+import MessageBox from '../../MessageBox';
 
 export default function MyForm() {
-    // console.log(action.data)
   const [nextId, setNextId] = useState();
   const [progress, setProgress] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesValue, setImagesValue] = useState();
+  const [success, setSuccess] = useState(false);
+
 
   //VALUE FROM INPUT
   const [vrstaUsluge, setVrstaUsluge] = useState("Prodaja");
@@ -63,35 +64,6 @@ export default function MyForm() {
 
   }
 
-  const addProduct = () =>{
-    var data = {
-        vrstaUsluge:vrstaUsluge,
-        tipNekretnine:tipNekretnine,
-        naslov:naslov,
-        opis:opis,
-        drzava:drzava,
-        grad:grad,
-        opstina:opstina,
-        ulica:ulica,
-        broj:broj,
-        uknjizenost:uknjizenost,
-        stanje:stanje,
-        povrsina:povrsina,
-        brojSoba:brojSoba,
-        grejanje:grejanje,
-        sprat:sprat,
-        brojSpratova:brojUkupnoSpratova,
-        opremljenost:opremljenost,
-        cena:cena,
-        slika:imagesValue
-    }
-    axios.post("http://localhost:3001/realEstate/add", data).then((response) => {
-        if(response.status == 200){
-        }else{
-        alert("Greska")
-        }
-    })
-}
 
   const handleUpload = () => {
     const promises = [];
@@ -142,31 +114,18 @@ export default function MyForm() {
   })
 
     
-    //window.location.reload(false)
     Promise.all(promises)
       .then(() => {
-        $(".close-icon").click();
-        alert("dodat proizvod")
+        setSuccess(true);
       })
       .catch((err) => console.log(err));
   };
 
 
-
-
-  // useEffect(() => {
-  //   var nextId;
-  //   axios.get("http://localhost:3001/realEstate/nextId").then((response) => {
-  //       if(response.status == 200){
-  //         nextId=response.data[0].AUTO_INCREMENT;
-  //       }
-  //       setNextId(nextId);
-  //   });
-  // });
-
   return (
     <div>
-        <div className="formContainer">
+          {success && <MessageBox text="Uspesno ste dodali nekretninu" refresh={true}></MessageBox>}
+          <div className="formContainer">
                 <div className="content-form">
                     <div id="basicInf">
                         <h5>Osnovne informacije</h5>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react"
+import {useNavigate} from "react-router-dom"
+import { useTranslation } from "react-i18next";
 
 export default function SendQuest(){
-  
+    let history = useNavigate();
+    const { t } = useTranslation();
     return (
         <div className="sendQuest">
             <img src="./sellBanner.jpeg" alt="Sell banner"></img>
@@ -9,16 +12,13 @@ export default function SendQuest(){
                 <div className="row">
                     <div className="col-md-6 col-sm-12 offset-md-6">
                         <div className="container-quest">
-                            <h5>Oglasite vasu nekretninu</h5>
-                            <span>Ukoliko prodajete stan, kuću, lokal, poslovni prostor ili zemljište oglasite ga preko naše agencije. Da bi ostvarili što bržu prodaju na tržištu nekretnina potrebna je adekvatna profesionalna procena tržišne vrednosti Vaše nekretnine.<br></br>
-                            Sama procena nekretnine uključuje niz faktora koji utiču na njenu vrednosti, a u otkrivanju tih faktora na raspolaganju Vam stoji naš stručni tim sa dugogodišnjim iskustvom.</span>
-                            <button className="button-prime">Posalji upit</button>
+                            <h5>{t("advertise-your-property")}</h5>
+                            <span>{t("adv-text-1")}<br></br>{t("adv-text-2")}</span>
+                            <a className="button-prime" href="/slanje-upita">{t("send-request-button")}</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            
         </div>
     );
 }

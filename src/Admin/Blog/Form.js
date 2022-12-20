@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import {storage} from '../../helpers/firebase';
-import {ref, uploadBytes,uploadBytesResumable, deleteObject,getStorage,listAll  } from 'firebase/storage'
 import axios from 'axios';
-import {v4} from "uuid";
-import $ from "jquery";
+import MessageBox from '../../MessageBox';
 
 export default function MyForm() {
 
@@ -11,7 +8,7 @@ export default function MyForm() {
   const [naslov, setNaslov] = useState("");
   const [text, setText] = useState("");
   const [allow, setAllow] = useState(false);
-
+  const [success, setSuccess] = useState(false);
 
 
   const addBlog = () =>{
@@ -22,10 +19,7 @@ export default function MyForm() {
     }
     axios.post("http://localhost:3001/blog/add", data).then((response) => {
         if(response.status == 200){
-          alert("Uspesno ste dodali strucni tekst");
-          window.location.reload(false);
-        }else{
-        alert("Greska");
+          setSuccess(true);
         }
     })
 }
@@ -33,6 +27,7 @@ export default function MyForm() {
 
   return (
     <div>
+        {success && <MessageBox  text="Uspesno ste dodali strucni tekst" refresh={true}></MessageBox>}
         <div className="formContainer">
                 <div className="content-form">
                   {/* NASLOV */}
@@ -42,8 +37,10 @@ export default function MyForm() {
                   <label>Tekst</label>
                   <textarea name='text' id='text' placeholder='Unesite tekst...' onChange={(event) => {setText(event.target.value);}}></textarea>
                   {/* VIDLJIVOST */}
-                  <label>Vidljivost</label>
-                  <input type="checkbox" id="vidljivost" name='vidljivost' onChange={(event) => {setAllow(event.target.checked);}}></input>
+                  <div className='allow'>
+                    <label>Vidljivost</label>
+                    <input type="checkbox" id="vidljivost" name='vidljivost' onChange={(event) => {setAllow(event.target.checked);}}></input>
+                  </div>
                 </div>
                 <div className="button-section">
                     <button onClick={addBlog}>Dodaj strucni tekst</button>

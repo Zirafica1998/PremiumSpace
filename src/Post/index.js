@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
 import {useNavigate} from "react-router-dom"
 import Pagination from "./Pagination";
+import { useTranslation } from "react-i18next";
 
-export default function Posts( posts, loading, pressSearch){
+
+export default function Posts( posts){
   const [postsGet,setPostsGet] = useState([]);
   const [submit,setSubmit] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -11,13 +13,10 @@ export default function Posts( posts, loading, pressSearch){
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
   let history = useNavigate();
+  const { t } = useTranslation();
 
-
- 
 
   const currentPost = (posts.posts).slice(indexOfFirstPost, indexOfLastPost);
-
-
  
   const paginate = pageNumber => setCurrentPage(pageNumber);
   useEffect(()=>{
@@ -29,19 +28,23 @@ export default function Posts( posts, loading, pressSearch){
     return (
       <div>
         <div className='row'>
-          <div className="result-count"><p><span>{postsGet.length}</span> rezultata na osnovu pretrage</p></div>
+          <div className="result-count"><p><span>{postsGet.length}</span> {t("result_serach")}</p></div>
           {currentPost.map(val => (
               <div className="realEstate col-lg-4 col-md-4 col-sm-6"  key={val.id} onClick = {() => {history('/products/'+val.id)}}>
                 <a>
                   <div className="up-section">
                     <div className="img">
-                      <img src={"https://firebasestorage.googleapis.com/v0/b/premiumspace-dfd7a.appspot.com/o/images%2F"+(val.id)+"%2F"+((val.slika).toString().split(';'))[0]+"?alt=media"} alt="image" />
-                    </div>
+                    {val.slika == null ? (
+                      <img src='no-image.png' alt='No image'></img>
+                    ):(
+                       <img src={"https://firebasestorage.googleapis.com/v0/b/premiumspace-dfd7a.appspot.com/o/images%2F"+(val.id)+"%2F"+((val.slika).toString().split(';'))[0]+"?alt=media"} alt="image" />
+                     )}                    
+                     </div>
                     <div className="price">
                         <span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(val.cena)}</span>
                     </div>
                     <div className="type">
-                       <span>{val.vrstaUsluge}</span>
+                       <span>{t(val.vrstaUsluge)}</span>
                     </div>
                   </div>
                   <div className="center-section">
@@ -75,27 +78,3 @@ export default function Posts( posts, loading, pressSearch){
     );
   }
 };
-
-function CommaFormatted(amount) {
-	var delimiter = ","; // replace comma if desired
-	var a = amount.split('.',2)
-	var d = a[1];
-	var i = parseInt(a[0]);
-	if(isNaN(i)) { return ''; }
-	var minus = '';
-	if(i < 0) { minus = '-'; }
-	i = Math.abs(i);
-	var n = new String(i);
-	var a = [];
-	while(n.length > 3) {
-		var nn = n.substr(n.length-3);
-		a.unshift(nn);
-		n = n.substr(0,n.length-3);
-	}
-	if(n.length > 0) { a.unshift(n); }
-	n = a.join(delimiter);
-	if(d.length < 1) { amount = n; }
-	else { amount = n + '.' + d; }
-	amount = minus + amount;
-	return amount;
-}

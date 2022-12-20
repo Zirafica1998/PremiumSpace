@@ -4,6 +4,7 @@ import Axios from 'axios'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { useTranslation } from "react-i18next";
 
 
 export default function Product() {
@@ -12,6 +13,7 @@ export default function Product() {
     const [data, setData] = useState([])
     const [image,setImage] = useState([])
     const [linkAddress, setLinkAddress] = useState([]);
+    const { t } = useTranslation();
 
     const settings = {
         dots: true,
@@ -80,24 +82,24 @@ export default function Product() {
                   </div>
                 </div>
                 <div className="row details">
-                  <span className="title">Detalji</span>
+                  <span className="title">{t("detail-title")}</span>
                   <div className="section section-1">
-                    <span className="subtitle">Podaci o nekretnini</span>
+                    <span className="subtitle">{t("detail-subtitle-relestate")}</span>
                     <ul>
-                      <li>Vrsta usluge: <strong>{data.vrstaUsluge}</strong></li>
-                      <li>Kvadratura:<strong> {data.povrsina} m²</strong></li>
-                      <li>Stanje nekretnine: <strong>{data.stanje}</strong></li>
-                      <li>Broj soba:<strong>{data.brojSoba}</strong> </li>
-                      <li>Sprat: <strong>{data.sprat}</strong></li>
-                      <li>Opremljenost: <strong>{data.opremljenost}</strong></li>
-                      <li>Ukupan broj spratova: <strong>{data.brojSpratova}</strong></li>
-                      <li>Grejanje: <strong>{data.grejanje}</strong></li>
+                      <li>{t("type-of-service")} <strong>{data.vrstaUsluge}</strong></li>
+                      <li>{t("square-footage")}<strong> {data.povrsina} m²</strong></li>
+                      <li>{t("condition-of-the-property")}<strong>{data.stanje}</strong></li>
+                      <li>{t("number-of-rooms")}<strong>{data.brojSoba}</strong> </li>
+                      <li>{t("floor")}<strong>{data.sprat}</strong></li>
+                      <li>{t("equipment")}<strong>{data.opremljenost}</strong></li>
+                      <li>{t("total-number-of-floors")}<strong>{data.brojSpratova}</strong></li>
+                      <li>{t("heating")}<strong>{data.grejanje}</strong></li>
 
                     </ul>
                   </div>
                 </div>
                 <div className="row text-desc">
-                  <span className="title">Opis</span>
+                  <span className="title">{t("description")}</span>
                   <div className="section-1">
                     <span>Opstina {data.opstina}</span>
                     <span>{data.ulica} {data.broj}</span>
@@ -105,7 +107,7 @@ export default function Product() {
                   </div>
                 </div>
                 <div className="row location-map">
-                  <span className="title">Lokacija</span>
+                  <span className="title">{t("location")}</span>
                   <div className="section-1">
                     <span><b>{data.drzava} - {data.grad} - {data.opstina} - {data.ulica} {data.broj}</b></span>
                   </div>

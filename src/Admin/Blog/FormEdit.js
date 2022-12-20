@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import { storage } from '../../helpers/firebase';
 import axios from 'axios';
-import {v4} from "uuid"
+import MessageBox from '../../MessageBox';
 
 export default function MyFormEdit(data) {
   const [id,setId] = useState(data.data.id)
   const [naslov, setNaslov] = useState(data.data.naslov);
   const [text, setText] = useState(data.data.text);
   const [allow, setAllow] = useState(data.data.allow);
+  const [success, setSuccess] = useState(false);
 
 
 
@@ -20,7 +20,7 @@ export default function MyFormEdit(data) {
     }
     axios.post("http://localhost:3001/blog/edit", data).then((response) => {
         if(response.status == 200){
-          window.location.reload(false);
+          setSuccess(true)
         }else{
           alert("Greska")
         }
@@ -44,6 +44,7 @@ export default function MyFormEdit(data) {
 
   return (
     <div>
+        {success && <MessageBox  text="Uspesno ste izmenili strucni tekst" refresh={true}></MessageBox>}
         <div className="formContainer">
                 <div className="content-form">
                   {/* NASLOV */}
@@ -53,12 +54,14 @@ export default function MyFormEdit(data) {
                   <label>Tekst</label>
                   <textarea name='text' id='text' defaultValue={data.data.text} onChange={(event) => {setText(event.target.value);}}></textarea>
                   {/* VIDLJIVOST */}
-                  <label>Vidljivost</label>
-                  {data.data.allow ?(
-                  <input type="checkbox" id="vidljivost" name='vidljivost' defaultChecked onChange={(event) => {setAllow(event.target.checked);}}></input>
-                  ): (
-                  <input type="checkbox" id="vidljivost" name='vidljivost' onChange={(event) => {setAllow(event.target.checked);}}></input> 
-                  )}
+                  <div className='allow'>
+                    <label>Vidljivost</label>
+                    {data.data.allow ?(
+                    <input type="checkbox" id="vidljivost" name='vidljivost' defaultChecked onChange={(event) => {setAllow(event.target.checked);}}></input>
+                    ): (
+                    <input type="checkbox" id="vidljivost" name='vidljivost' onChange={(event) => {setAllow(event.target.checked);}}></input> 
+                    )}
+                  </div>
                 </div>
                 <div className="button-section">
                     <button onClick={addBlog}>Azuriraj blog</button>

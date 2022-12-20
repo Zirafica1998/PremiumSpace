@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react"
 import Axios from 'axios'
 import Posts from "../Post";
-import Pagination from "../Post/Pagination";
+import MessageBox from "../MessageBox";
+import $ from "jquery"
+import { useTranslation } from "react-i18next";
+
 
 export default function SearchForm() {
-
+  const { t } = useTranslation();
   const [type, setType] = useState("Stan");
   const [searchWord, setsearchWord] = useState("");
   const [sizeFrom, setsizeFrom] = useState("");
@@ -12,25 +15,27 @@ export default function SearchForm() {
   const [priceFrom, setpriceFrom] = useState("");
   const [priceOf, setpriceOf] = useState("");
   const [isSubmitted,setIsSubmitted] = useState("");
-  const [realEstateList,setRealEstateList] = useState("");
-
-
   const [posts, setPosts] = useState([]);
-  const [currentPosts, setCurrentPost] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [postsPerPage] = useState(12);
+  const [typeService,setTypeService] = useState("Prodaja");
 
+  
+  const [noProduct,setNoProduct] = useState();
+  
   var jsonObject=[]
   var jsonObject1=[]
   const submitSearch = () => {
     setLoading(false);
     const fetchPosts = async () => {
       setLoading(true);
-     await Axios.post('http://localhost:3001/realEstate/byData',{
-      searchWord:searchWord,
-      type:type
-     }).then((res) =>{
+      
+      var data={
+        searchWord:searchWord,
+        type:type,
+        typeService:typeService
+      }
+
+     await Axios.post('http://localhost:3001/realEstate/byData',data).then((res) =>{
       if(res.data.length>0){
         setPosts(res.data);
         setLoading(false);
@@ -75,7 +80,7 @@ export default function SearchForm() {
         })
         
       }else{
-        alert("Nema prozivoda")
+        setNoProduct(true);
       }
      })
       setPosts(jsonObject1);
@@ -85,23 +90,27 @@ export default function SearchForm() {
 
   return(
     <div>
+      { noProduct && <MessageBox text={t("no-product")} refresh={false} pressSearch = {noProduct}></MessageBox>}
       <div className="container forms">
               <div className="input-group">
-                  <select name="type" onChange={(e) => {setType(e.target.value)}}>
-                      <option value="stan">Stan</option>
-                      <option value="kuca">Kuća</option>
-                      <option value="lokal">Lokal</option>
-                      <option value="poslovniProstor">Poslovni prostor</option>
-                      <option value="zemljiste">Zemljište</option>
-                      <option value="garaza">Garaža</option>
-                      <option value="sveNekretnine">Sve nekretnine</option>
+                  <select name="type" id="typService"  onChange={(e) => {setTypeService(e.target.value)}}>
+                      <option value="prodaja">{t("sell")}</option>
+                      <option value="izdavanje">{t("rent")}</option>
                   </select>
-                  <input name="searchWord" type="text"  placeholder="Grad,Opština,Lokacija,Ulica" onChange={(e) => {setsearchWord(e.target.value)}} />
-                  <input name="sizeFrom" type="text"  placeholder="od m2" onChange={(e) => {setsizeFrom(e.target.value)}} />
-                  <input name="sizeOf" type="text"  placeholder="do m2" onChange={(e) => {setSizeOf(e.target.value)}} />
-                  <input name="priceFrom" type="text"  placeholder="cena od" onChange={(e) => {setpriceFrom(e.target.value)}} />
-                  <input name="priceOf" type="text"  placeholder="cena do" onChange={(e) => {setpriceOf(e.target.value)}}/>
-                  <button className="button-prime" onClick={submitSearch}>Pretrazi</button>
+                  <select name="type" onChange={(e) => {setType(e.target.value)}}>
+                      <option value="stan">{t("apartment")}</option>
+                      <option value="kuca">{t("house")}</option>
+                      <option value="lokal">{t("shop")}</option>
+                      <option value="poslovniProstor">{t("business_premises")}</option>
+                      <option value="zemljiste">{t("land")}</option>
+                      <option value="garaza">{t("garage")}</option>
+                  </select>
+                  <input name="searchWord" type="text"  placeholder={t("placeholder_serach_word")} onChange={(e) => {setsearchWord(e.target.value)}} />
+                  <input name="sizeFrom" type="text"  placeholder={t("placeholder_sizeOf")} onChange={(e) => {setsizeFrom(e.target.value)}} />
+                  <input name="sizeOf" type="text"  placeholder={t("placeholder_sizeFrom")} onChange={(e) => {setSizeOf(e.target.value)}} />
+                  <input name="priceFrom" type="text"  placeholder={t("placeholder_priceOf")} onChange={(e) => {setpriceFrom(e.target.value)}} />
+                  <input name="priceOf" type="text"  placeholder={t("placeholder_priceFrom")} onChange={(e) => {setpriceOf(e.target.value)}}/>
+                  <button className="button-prime" id="searchButton" onClick={submitSearch}>{t("serach_button")}</button>
               </div>
       </div>
       <div className="container result">

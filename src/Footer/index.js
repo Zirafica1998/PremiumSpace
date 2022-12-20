@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useTranslation } from "react-i18next";
 
 
-export default class Footer extends Component {
-  render() {
+export default function Footer() {
+  const { t } = useTranslation();
+
     return (
       <footer className="footer">
         <div className="container">
@@ -15,7 +17,7 @@ export default class Footer extends Component {
             </div>
             <div className="row">
                 <div className="col-md-4 offset-md-4 mobileNumber">
-                <a href="tel:7078155908">(707) 815-5908</a>|<a href="#">Kontakt</a>
+                <a href="tel:7078155908">(707) 815-5908</a>|<a href="/kontakt">{t("contact")}</a>
                 </div>
             </div>
             <div className="row">
@@ -31,6 +33,5 @@ export default class Footer extends Component {
           </ul>
         </div>
       </footer>
-    );
-  }
+    )
 }
